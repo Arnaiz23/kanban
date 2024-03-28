@@ -10,9 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.12",
     "@astrojs/check": "^0.5.10",
-    "typescript": "^5.4.3"
+    "astro": "^4.5.12",
+    "prisma": "^5.11.0",
+    "typescript": "^5.4.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^7.4.0",
