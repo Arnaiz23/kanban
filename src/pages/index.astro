@@ -1,9 +1,57 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import ProjectCard from "../components/ProjectCard.astro"
+
+const Projects: { slug: string; title: string }[] = [
+  {
+    slug: "ikigaipsicologia",
+    title: "Ikigaipsicologia",
+  },
+  {
+    slug: "todo",
+    title: "Todo",
+  },
+  {
+    slug: "portfolio",
+    title: "Portfolio",
+  },
+]
 ---
 
 <Layout title="Home">
-  <main></main>
+  <main>
+    <h1>Kanban</h1>
+    <section>
+      {
+        Projects.map(({ slug, title }) => (
+          <ProjectCard slug={slug} title={title} />
+        ))
+      }
+    </section>
+  </main>
 </Layout>
 
-<style></style>
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  main {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  section {
+    width: 100%;
+    padding: 20px 10px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+</style>

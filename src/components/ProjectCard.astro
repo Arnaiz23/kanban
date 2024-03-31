@@ -1,0 +1,43 @@
+---
+interface Props {
+  slug: string
+  title: string
+}
+
+const { slug, title } = Astro.props
+---
+
+<article>
+  <a href={`/project/${slug}`}>
+    <p>{title}</p>
+    <!-- Is an option show the data like todoNum, doingNum, doNum -->
+  </a>
+</article>
+
+<style>
+  article {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    display: grid;
+    place-items: center;
+
+    & p {
+      font-size: 18px;
+    }
+
+    & a {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+
+      transition: scale .5s;
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
+</style>
