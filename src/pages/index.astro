@@ -1,18 +1,22 @@
 ---
 import { db, Project } from "astro:db"
 
-import Layout from "../layouts/Layout.astro"
-import ProjectCard from "../components/ProjectCard.astro"
+import Layout from "@/layouts/Layout.astro"
+import ProjectCard from "@/components/ProjectCard.astro"
+import PlusIcon from "@/components/Icons/Plus.astro"
 
-const Projects = await db.select().from(Project)
+const PROJECTS = await db.select().from(Project)
 ---
 
 <Layout title="Home">
   <main>
-    <h1>Kanban</h1>
+    <header>
+      <h1>Kanban</h1>
+      <button><PlusIcon width="16" height="16" /> Project</button>
+    </header>
     <section>
       {
-        Projects.map(({ slug, name }) => (
+        PROJECTS.map(({ slug, name }) => (
           <ProjectCard slug={slug} name={name} />
         ))
       }
@@ -32,6 +36,28 @@ const Projects = await db.select().from(Project)
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  header {
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    & > button {
+      position: absolute;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 10px;
+      background-color: var(--lime);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 
   section {
