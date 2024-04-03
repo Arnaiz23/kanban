@@ -1,15 +1,15 @@
 ---
 interface Props {
   slug: string
-  title: string
+  name: string
 }
 
-const { slug, title } = Astro.props
+const { slug, name } = Astro.props
 ---
 
 <article>
   <a href={`/project/${slug}`}>
-    <p>{title}</p>
+    <p>{name}</p>
     <!-- Is an option show the data like todoNum, doingNum, doNum -->
   </a>
 </article>
@@ -33,7 +33,7 @@ const { slug, title } = Astro.props
       display: grid;
       place-items: center;
 
-      transition: scale .5s;
+      transition: scale 0.5s;
 
       &:hover {
         scale: 1.1;

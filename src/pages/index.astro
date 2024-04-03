@@ -1,21 +1,10 @@
 ---
+import { db, Project } from "astro:db"
+
 import Layout from "../layouts/Layout.astro"
 import ProjectCard from "../components/ProjectCard.astro"
 
-const Projects: { slug: string; title: string }[] = [
-  {
-    slug: "ikigaipsicologia",
-    title: "Ikigaipsicologia",
-  },
-  {
-    slug: "todo",
-    title: "Todo",
-  },
-  {
-    slug: "portfolio",
-    title: "Portfolio",
-  },
-]
+const Projects = await db.select().from(Project)
 ---
 
 <Layout title="Home">
@@ -23,8 +12,8 @@ const Projects: { slug: string; title: string }[] = [
     <h1>Kanban</h1>
     <section>
       {
-        Projects.map(({ slug, title }) => (
-          <ProjectCard slug={slug} title={title} />
+        Projects.map(({ slug, name }) => (
+          <ProjectCard slug={slug} name={name} />
         ))
       }
     </section>
