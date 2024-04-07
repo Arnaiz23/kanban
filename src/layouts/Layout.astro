@@ -28,6 +28,10 @@ const { title } = Astro.props
     box-sizing: border-box;
     --background-color: #202b38;
     --lime: #5dc1b9;
+    --background-lighter: color-mix(in srgb, var(--background-color), white 75%);
+    --background-light: color-mix(in srgb, var(--background-color), white);
+    --background-dark: color-mix(in srgb, var(--background-color), black 25%);
+    --background-darker: color-mix(in srgb, var(--background-color), black);
   }
 
   a {

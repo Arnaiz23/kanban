@@ -13,6 +13,13 @@ const PROJECTS = await db.select().from(Project)
     <header>
       <h1>Kanban</h1>
       <button><PlusIcon width="16" height="16" /> Project</button>
+      <section class="modal">
+        <form>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+          <button type="submit">Create</button>
+        </form>
+      </section>
     </header>
     <section>
       {
@@ -23,6 +30,15 @@ const PROJECTS = await db.select().from(Project)
     </section>
   </main>
 </Layout>
+
+<script>
+  const buttonCreate = document.querySelector("header > button")
+  const modal = document.querySelector(".modal")
+
+  buttonCreate?.addEventListener("click", () => {
+    modal?.classList.toggle("modal-open")
+  })
+</script>
 
 <style>
   h1 {
@@ -57,6 +73,52 @@ const PROJECTS = await db.select().from(Project)
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    & > .modal {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      right: 10px;
+      border: 1px solid #fff;
+      width: max-content;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: var(--background-light);
+
+      &.modal-open {
+        display: grid;
+      }
+
+      & > form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #000;
+
+        & > label {
+          font-weight: bold;
+        }
+
+        & > input {
+          width: 90%;
+          border-radius: 10px;
+          border: none;
+          padding: 10px;
+          outline: none;
+        }
+
+        & > button {
+          padding: 10px;
+          border: none;
+          border-radius: 10px;
+          background-color: var(--lime);
+          cursor: pointer;
+        }
+      }
     }
   }
 
