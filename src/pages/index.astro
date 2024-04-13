@@ -24,7 +24,9 @@ const PROJECTS_MAP = PROJECTS.map((p) => ({
   <main>
     <header>
       <h1>Kanban</h1>
-      <button><PlusIcon width="16" height="16" /> Project</button>
+      <button class="create-project"
+        ><PlusIcon width="16" height="16" /> Project</button
+      >
       <NewProjectPopup />
     </header>
     <section>
@@ -34,11 +36,17 @@ const PROJECTS_MAP = PROJECTS.map((p) => ({
 </Layout>
 
 <script>
-  const buttonCreate = document.querySelector("header > button")
+  const buttonCreate = document.querySelector(".create-project")
   const modal = document.querySelector(".modal")
 
   buttonCreate?.addEventListener("click", () => {
     modal?.classList.toggle("modal-open")
+  })
+
+  window.addEventListener("click", (e) => {
+    if (!modal?.contains(e.target as Node) && e.target != buttonCreate) {
+      modal?.classList.remove("modal-open")
+    }
   })
 </script>
 
