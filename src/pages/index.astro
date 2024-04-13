@@ -1,11 +1,22 @@
 ---
-import { db, Project } from "astro:db"
+import { db, Project, Column, Task } from "astro:db"
 
 import Layout from "@/layouts/Layout.astro"
 import ProjectCard from "@/components/ProjectCard.astro"
 import PlusIcon from "@/components/Icons/Plus.astro"
 
 const PROJECTS = await db.select().from(Project)
+const COLUMNS = await db.select().from(Column)
+const TASKS = await db.select().from(Task)
+
+const PROJECTS_MAP = PROJECTS.map(p => ({
+  project_name: p.name,
+  project_slug: p.slug,
+  columns_names: COLUMNS.filter(c => c.project_id === p.id).map(c => ({
+    name: c.name,
+    count: TASKS.filter(t => t.column_id === c.id).length
+  }))
+}))
 ---
 
 <Layout title="Home">
@@ -23,8 +34,8 @@ const PROJECTS = await db.select().from(Project)
     </header>
     <section>
       {
-        PROJECTS.map(({ slug, name }) => (
-          <ProjectCard slug={slug} name={name} />
+        PROJECTS_MAP.map((p) => (
+          <ProjectCard project={p} />
         ))
       }
     </section>

@@ -1,40 +1,97 @@
 ---
 interface Props {
-  slug: string
-  name: string
+  project: {
+    project_name: string
+    project_slug: string
+    columns_names: {
+      name: string
+      count: number
+    }[]
+  }
 }
 
-const { slug, name } = Astro.props
+const { project } = Astro.props
+
+const COLORS = [
+  "#6678f0",
+  "#1dd8c5",
+  "#3bcf77",
+  "#480a7b",
+  "#921c3e",
+]
 ---
 
 <article>
-  <a href={`/project/${slug}`}>
-    <p>{name}</p>
-    <!-- Is an option show the data like todoNum, doingNum, doNum -->
-  </a>
+  <header>
+    <span
+      style={{
+        backgroundColor: COLORS[Math.floor(Math.random() * COLORS.length)],
+      }}></span>
+    <h2>
+      <a href={`/project/${project.project_slug}`}> {project.project_name}</a>
+    </h2>
+  </header>
+  <main>
+    {
+      project.columns_names.map((c) => (
+        <div>
+          <p>{c.name}</p>
+          <p class="count">{c.count}</p>
+        </div>
+      ))
+    }
+  </main>
 </article>
 
 <style>
   article {
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    padding: 30px;
     border-radius: 10px;
     display: grid;
     place-items: center;
     background-color: var(--primary-color);
     color: #000;
+    gap: 20px;
 
-    & p {
-      font-size: 18px;
+    header {
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: flex-start;
+
+      & > h2 {
+        font-size: 20px;
+      }
+
+      & > span {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+      }
     }
 
-    & a {
+    main {
       width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 20px;
 
-      transition: scale 0.5s;
+      & > div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 20px;
+        font-weight: 600;
+
+        & > .count {
+          color: #555555;
+        }
+      }
     }
   }
 </style>

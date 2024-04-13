@@ -1,4 +1,6 @@
 ---
+import "@fontsource-variable/inter"
+
 interface Props {
   title: string
 }
@@ -27,8 +29,8 @@ const { title } = Astro.props
     padding: 0;
     box-sizing: border-box;
     --background-color: #262730;
-    --primary-color: #7698B3;
-    --secondary-color: #EFF0D1;
+    --primary-color: #7698b3;
+    --secondary-color: #eff0d1;
   }
 
   a {
@@ -39,5 +41,6 @@ const { title } = Astro.props
   body {
     background-color: var(--background-color);
     color: #fff;
+    font-family: "Inter Variable", sans-serif;
   }
 </style>
