@@ -12,13 +12,7 @@ interface Props {
 
 const { project } = Astro.props
 
-const COLORS = [
-  "#6678f0",
-  "#1dd8c5",
-  "#3bcf77",
-  "#480a7b",
-  "#921c3e",
-]
+const COLORS = ["#6678f0", "#1dd8c5", "#3bcf77", "#480a7b", "#921c3e"]
 ---
 
 <article>
@@ -45,7 +39,8 @@ const COLORS = [
 
 <style>
   article {
-    width: 300px;
+    max-width: 300px;
+    width: 90%;
     padding: 30px;
     border-radius: 10px;
     display: grid;
@@ -53,6 +48,10 @@ const COLORS = [
     background-color: var(--primary-color);
     color: #000;
     gap: 20px;
+
+    @media screen and (width <= 374px) {
+      padding: 30px 20px;
+    }
 
     header {
       width: 100%;

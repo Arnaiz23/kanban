@@ -9,13 +9,13 @@ const PROJECTS = await db.select().from(Project)
 const COLUMNS = await db.select().from(Column)
 const TASKS = await db.select().from(Task)
 
-const PROJECTS_MAP = PROJECTS.map(p => ({
+const PROJECTS_MAP = PROJECTS.map((p) => ({
   project_name: p.name,
   project_slug: p.slug,
-  columns_names: COLUMNS.filter(c => c.project_id === p.id).map(c => ({
+  columns_names: COLUMNS.filter((c) => c.project_id === p.id).map((c) => ({
     name: c.name,
-    count: TASKS.filter(t => t.column_id === c.id).length
-  }))
+    count: TASKS.filter((t) => t.column_id === c.id).length,
+  })),
 }))
 ---
 
@@ -33,11 +33,7 @@ const PROJECTS_MAP = PROJECTS.map(p => ({
       </section>
     </header>
     <section>
-      {
-        PROJECTS_MAP.map((p) => (
-          <ProjectCard project={p} />
-        ))
-      }
+      {PROJECTS_MAP.map((p) => <ProjectCard project={p} />)}
     </section>
   </main>
 </Layout>
@@ -70,6 +66,13 @@ const PROJECTS_MAP = PROJECTS.map(p => ({
     place-items: center;
     position: relative;
 
+    @media screen and (width <= 560px) {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 20px;
+    }
+
     & > button {
       position: absolute;
       right: 20px;
@@ -84,6 +87,10 @@ const PROJECTS_MAP = PROJECTS.map(p => ({
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+
+      @media screen and (width <= 560px) {
+        position: static;
+      }
     }
 
     & > .modal {
