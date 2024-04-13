@@ -19,9 +19,10 @@ const { slug, name } = Astro.props
     width: 250px;
     height: 200px;
     border-radius: 10px;
-    border: 1px solid #fff;
     display: grid;
     place-items: center;
+    background-color: var(--primary-color);
+    color: #000;
 
     & p {
       font-size: 18px;
@@ -34,10 +35,6 @@ const { slug, name } = Astro.props
       place-items: center;
 
       transition: scale 0.5s;
-
-      &:hover {
-        scale: 1.1;
-      }
     }
   }
 </style>
