@@ -4,6 +4,7 @@ import { db, Project, Column, Task } from "astro:db"
 import Layout from "@/layouts/Layout.astro"
 import ProjectCard from "@/components/ProjectCard.astro"
 import PlusIcon from "@/components/Icons/Plus.astro"
+import NewProjectPopup from "@/components/NewProjectPopup.astro"
 
 const PROJECTS = await db.select().from(Project)
 const COLUMNS = await db.select().from(Column)
@@ -24,13 +25,7 @@ const PROJECTS_MAP = PROJECTS.map((p) => ({
     <header>
       <h1>Kanban</h1>
       <button><PlusIcon width="16" height="16" /> Project</button>
-      <section class="modal">
-        <form>
-          <label for="name">Name</label>
-          <input type="text" name="name" />
-          <button type="submit">Create</button>
-        </form>
-      </section>
+      <NewProjectPopup />
     </header>
     <section>
       {PROJECTS_MAP.map((p) => <ProjectCard project={p} />)}
@@ -90,52 +85,6 @@ const PROJECTS_MAP = PROJECTS.map((p) => ({
 
       @media screen and (width <= 560px) {
         position: static;
-      }
-    }
-
-    & > .modal {
-      display: none;
-      position: absolute;
-      top: calc(100% + 5px);
-      right: 10px;
-      border: 1px solid #fff;
-      width: max-content;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: var(--background-light);
-
-      &.modal-open {
-        display: grid;
-      }
-
-      & > form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        color: #000;
-
-        & > label {
-          font-weight: bold;
-        }
-
-        & > input {
-          width: 90%;
-          border-radius: 10px;
-          border: none;
-          padding: 10px;
-          outline: none;
-        }
-
-        & > button {
-          padding: 10px;
-          border: none;
-          border-radius: 10px;
-          background-color: var(--lime);
-          cursor: pointer;
-        }
       }
     }
   }
