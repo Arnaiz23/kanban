@@ -6,6 +6,46 @@
   </form>
 </section>
 
+<script>
+  const form = document.querySelector(".modal > form") as HTMLFormElement
+  const input = document.querySelector(
+    ".modal > form > input",
+  ) as HTMLInputElement
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const data = new FormData(form)
+
+    const project_name = data.get("name")
+
+    if (!project_name) {
+      // TODO: control this with alert
+      input.classList.add("error")
+      return
+    }
+
+    input.classList.remove("error")
+
+    fetch(`/api/createProject`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ name: project_name }),
+    })
+      .then(async (res) => {
+        if (!res.status) {
+          const body = await res.json()
+          console.error(body.error)
+          input.classList.add("error")
+          return
+        }
+        return res
+      })
+  })
+</script>
+
 <style>
   section {
     display: none;
@@ -41,6 +81,11 @@
         border: none;
         padding: 10px;
         outline: none;
+        border: 2px solid transparent;
+
+        &.error {
+          border-color: red;
+        }
       }
 
       & > button {
