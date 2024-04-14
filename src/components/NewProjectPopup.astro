@@ -7,6 +7,7 @@
 </section>
 
 <script>
+  const modal = document.querySelector(".modal")
   const form = document.querySelector(".modal > form") as HTMLFormElement
   const input = document.querySelector(
     ".modal > form > input",
@@ -42,6 +43,10 @@
           return
         }
         return res
+      })
+      .then(() => {
+        form.reset()
+        modal?.classList.remove("modal-open")
       })
   })
 </script>
