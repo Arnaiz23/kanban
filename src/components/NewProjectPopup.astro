@@ -18,7 +18,7 @@
 
     const data = new FormData(form)
 
-    const project_name = data.get("name")
+    const project_name = data.get("name") as string
 
     if (!project_name) {
       // TODO: control this with alert
@@ -47,6 +47,8 @@
       .then(() => {
         form.reset()
         modal?.classList.remove("modal-open")
+        const slug = project_name.trim().toLowerCase().replaceAll(" ", "-")
+        document.location.href = `/project/${slug}`
       })
   })
 </script>
